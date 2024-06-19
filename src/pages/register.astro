@@ -1,0 +1,21 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout>
+  <section class="container mx-auto py-16">
+    <h2 class="text-3xl font-bold mb-4">Registro</h2>
+    <form class="max-w-md mx-auto bg-white p-8 rounded shadow-md">
+      <label for="nickname" class="block mb-2">Nickname</label>
+      <input type="text" id="nickname" name="nickname" class="w-full p-2 border rounded mb-4" required>
+      
+      <label for="email" class="block mb-2">Correo Electrónico</label>
+      <input type="email" id="email" name="email" class="w-full p-2 border rounded mb-4" required>
+      
+      <label for="password" class="block mb-2">Contraseña</label>
+      <input type="password" id="password" name="password" class="w-full p-2 border rounded mb-4" required>
+      
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Registrarse</button>
+    </form>
+  </section>
+</MainLayout>

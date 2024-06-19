@@ -1,0 +1,17 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import FileDropzone from '../components/FileDropzone.astro';
+---
+
+<MainLayout>
+  <section class="container mx-auto py-16">
+    <h2 class="text-3xl font-bold mb-4">Encriptación</h2>
+    <FileDropzone />
+    <form class="max-w-md mx-auto bg-white p-8 rounded shadow-md mt-8">
+      <label for="password" class="block mb-2">Contraseña</label>
+      <input type="password" id="password" name="password" class="w-full p-2 border rounded mb-4" required>
+      
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Encriptar</button>
+    </form>
+  </section>
+</MainLayout>
