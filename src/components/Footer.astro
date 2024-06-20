@@ -1,8 +1,51 @@
 ---
+/**
+ * Componente de Footer.
+ * @Desc: Pie de página del webapp, contiene información de derechos de autor y enlaces a redes sociales.
+ * @author: Josue Padilla
+ * @Date: 20-06-2024
+ */
 ---
 
-<footer class="bg-blue-600 text-white p-4">
-    <div class="container mx-auto text-center">
-      <p>&copy; 2024 AES-256 Encryptor. Todos los derechos reservados.</p>
+<style>
+  /* Sombra para el pie de página */
+  .shadow-footer {
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Estilo general del pie de página */
+  footer {
+    background-color: #0f172a;
+  }
+
+  /* Estilos para los enlaces de redes sociales */
+  .social-link {
+    color: white;
+    transition: color 0.3s ease;
+  }
+
+  .social-link:hover {
+    color: #1da1f2; /* Azul claro como color de hover */
+  }
+</style>
+
+<!-- Componente Footer -->
+<footer class="text-white p-3 shadow-footer">
+  <div class="container mx-auto flex justify-between items-center">
+    <p><b>&copy; 2024 AES-256 Encryptor.</b> Todos los derechos reservados.</p>
+    <div class="flex space-x-4">
+      <a href="https://github.com/encrypter" target="_blank" class="social-link">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://x.com/encrypter" target="_blank" class="social-link">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
+      <a href="https://reddit.com/encrypter" target="_blank" class="social-link">
+        <i class="fa-brands fa-reddit-alien"></i>
+      </a>
+      <a href="https://www.buymeacoffee.com/encrypter" target="_blank" class="social-link">
+        <i class="fa-solid fa-mug-hot"></i>
+      </a>
     </div>
-  </footer>  
+  </div>
+</footer>

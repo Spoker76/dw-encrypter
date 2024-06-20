@@ -1,0 +1,12 @@
+[
+    {
+      "title": "Mi Primer Post",
+      "slug": "mi-primer-post",
+      "content": "Este es el contenido de mi primer post."
+    },
+    {
+      "title": "Mi Segundo Post",
+      "slug": "mi-segundo-post",
+      "content": "Este es el contenido de mi segundo post."
+    }
+  ]  

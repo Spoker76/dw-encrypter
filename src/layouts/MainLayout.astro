@@ -1,4 +1,10 @@
 ---
+/**
+ * Layout principal del sitio.
+ * @Desc: Asigna la estructura principal que tendrá el sitio, sobre el se renderizan páginas y componentes.
+ * @author: Josue Padilla
+ * @Date: 20-06-2024
+ */
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/globals.css';
@@ -10,12 +16,61 @@ import '../styles/globals.css';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encriptador AES-256</title>
     <link rel="stylesheet" href="../styles/globals.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+    <link rel="icon" href="../../public/vault-solid.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
-  <body class="bg-gray-100 text-gray-900">
+  
+  <body class="bg-gray-100 text-gray-900 flex flex-col min-h-screen">
     <Header />
-    <main class="min-h-screen">
+    <main class="flex-grow flex justify-center items-center">
       <slot />
     </main>
     <Footer />
   </body>
 </html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let sortOrder = 'default';
+    const table = document.querySelector('table');
+    if (table) {
+      const header = table.querySelector('th:nth-child(2)');
+      const rows = Array.from(table.querySelectorAll('tbody tr'));
+
+      /**
+       * Ordena las filas de la tabla según la fecha y hora de creación.
+       */
+      function sortData() {
+        const sortedRows = rows.sort((a, b) => {
+          const aDate = new Date(a.cells[1].innerText);
+          const bDate = new Date(b.cells[1].innerText);
+
+          if (sortOrder === 'asc') {
+            return aDate - bDate;
+          } else if (sortOrder === 'desc') {
+            return bDate - aDate;
+          }
+          return rows;
+        });
+
+        const tbody = table.querySelector('tbody');
+        sortedRows.forEach(row => tbody.appendChild(row));
+      }
+
+      header.addEventListener('click', () => {
+        if (sortOrder === 'default') {
+          sortOrder = 'desc';
+        } else if (sortOrder === 'desc') {
+          sortOrder = 'asc';
+        } else {
+          sortOrder = 'default';
+        }
+        sortData();
+        header.innerHTML = `Fecha y Hora de Creación ${sortOrder === 'asc' ? '↑' : sortOrder === 'desc' ? '↓' : ''}`;
+      });
+    }
+  });
+</script>

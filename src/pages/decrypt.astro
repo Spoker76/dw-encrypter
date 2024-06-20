@@ -1,17 +1,90 @@
 ---
+/**
+ * Página de desencriptado.
+ * @Desc: El usuario podrá adjuntar sus archivos encriptados, proporcionar una clave y encriptarlos.
+ * @author: Josue Padilla
+ * @Date: 20-06-2024
+ */
 import MainLayout from '../layouts/MainLayout.astro';
 import FileDropzone from '../components/FileDropzone.astro';
 ---
 
+<style>
+  /* Estilos para el botón con efecto hover */
+  .btn-hover-lighten {
+    background-color: #33405f;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-hover-lighten:hover {
+    background-color: #5c6a8d;
+  }
+
+  /* Estilos para el contenedor del input */
+  .input-container {
+    position: relative;
+  }
+
+  /* Estilos para el icono del input */
+  .input-icon {
+    position: absolute;
+    right: 10px;
+    top: 72%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    color: #0F172A;
+  }
+
+  /* Estilos para el input */
+  input {
+    width: 100%;
+    padding: 0.5rem 2rem 0.5rem 0.75rem;
+    border: 1px solid #0c4a6e;
+    border-radius: 0.375rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  input:focus {
+    border-color: #147ea8;
+    box-shadow: 0 0 0 3px rgba(20, 126, 168, 0.3);
+    outline: none;
+  }
+
+  input:focus + .input-icon {
+    opacity: 0;
+  }
+
+  input::placeholder {
+    color: #b0c4de;
+  }
+
+  /* Estilo para el fondo principal */
+  .principal {
+    background-color: #0F172A;
+  }
+</style>
+
+<!-- Componente MainLayout -->
 <MainLayout>
   <section class="container mx-auto py-16">
-    <h2 class="text-3xl font-bold mb-4">Desencriptación</h2>
-    <FileDropzone />
-    <form class="max-w-md mx-auto bg-white p-8 rounded shadow-md mt-8">
-      <label for="password" class="block mb-2">Contraseña</label>
-      <input type="password" id="password" name="password" class="w-full p-2 border rounded mb-4" required>
-      
-      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Desencriptar</button>
-    </form>
+    <div class="max-w-2xl mx-auto p-8 rounded shadow-md rounded-lg principal">
+      <h2 class="text-3xl font-bold mb-4 text-center text-white">Desencriptación</h2>
+      <form>
+        <FileDropzone />
+        <div class="input-container mb-4 mt-4">
+          <label for="password" class="block mb-2 text-white font-bold ml-3">Clave</label>
+          <input type="password" id="password" name="password" class="w-full p-2 border rounded" required placeholder="Proporciona una clave">
+          <i class="fa-solid fa-lock-open input-icon"></i>
+        </div>
+        <div class="mt-3 flex justify-center">
+          <a href="/login" class="btn-hover-lighten shadow-md">Desencriptar</a>
+        </div>
+      </form>
+    </div>
   </section>
 </MainLayout>

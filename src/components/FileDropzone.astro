@@ -1,7 +1,62 @@
 ---
+/**
+ * Componente de FileDropZone.
+ * @Desc: Sirve para la subida de múltiples archivos.
+ * @author: Josue Padilla
+ * @Date: 20-06-2024
+ */
 ---
 
-<div class="border-2 border-dashed border-gray-300 p-8 rounded-lg text-center">
-    <p class="text-gray-600">Arrastra y suelta tus archivos aquí</p>
-    <input type="file" class="mt-4">
-  </div>  
+<style>
+  /* Estilos para la zona de arrastrar y soltar archivos */
+  .dropzone {
+    border: 2px dashed #0c4a6e;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    background-color: #f0faff;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .dropzone:hover {
+    border-color: #147ea8;
+    background-color: #e0f7ff;
+  }
+
+  .dropzone p {
+    color: #0c4a6e;
+    font-size: 1.25rem;
+  }
+
+  /* Estilos para el input de tipo archivo */
+  .dropzone input[type="file"] {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid #0c4a6e;
+    border-radius: 0.375rem;
+    background-color: white;
+    color: #0c4a6e;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .dropzone input[type="file"]:hover {
+    background-color: #147ea8;
+    color: white;
+    border-color: #147ea8;
+  }
+
+  /* Estilos para el icono de subida */
+  .uploadIcon {
+    color: #0F172A;
+    font-size: 4rem;
+  }
+</style>
+
+<!-- Componente Dropzone -->
+<div class="dropzone">
+  <i class="fa-solid fa-upload uploadIcon mb-4"></i>
+  <p>Arrastra y suelta tus archivos aquí</p>
+</div>

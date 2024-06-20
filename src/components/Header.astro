@@ -1,16 +1,76 @@
 ---
+/**
+ * Componente de Header.
+ * @Desc: Encabezado y barra de navegación del webapp, contiene los enlaces para desplazarse por la misma.
+ * @author: Josue Padilla
+ * @Date: 20-06-2024
+ */
+import '@fortawesome/fontawesome-free/css/all.min.css';
 ---
 
-<header class="bg-blue-600 text-white p-4">
-    <nav class="container mx-auto flex justify-between items-center">
-      <a href="/" class="text-xl font-bold">AES-256 Encryptor</a>
-      <div>
-        <a href="/login" class="ml-4">Login</a>
-        <a href="/register" class="ml-4">Registro</a>
-        <a href="/encrypt" class="ml-4">Encriptación</a>
-        <a href="/decrypt" class="ml-4">Desencriptación</a>
-        <a href="/keys" class="ml-4">Claves</a>
-        <a href="/about" class="ml-4">About</a>
-      </div>
-    </nav>
-  </header>  
+<style>
+  /* Sombra para la barra de navegación */
+  .shadow-navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Estilos para los enlaces animados */
+  .linkAnimado {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .linkAnimado::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: white;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .linkAnimado:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  /* Estilo general del header */
+  header {
+    background-color: #0f172a;
+  }
+</style>
+
+<!-- Componente Navbar -->
+<header class="text-white p-4 shadow-navbar sticky top-0 z-50">
+  <nav class="container mx-auto flex justify-between items-center">
+    <a href="/" class="text-xl font-bold">
+      <i class="fa-solid fa-vault mr-2"></i>AES-256 Encryptor
+    </a>
+    <div class="flex">
+      <a href="/login" class="ml-4 flex items-center linkAnimado">
+        <i class="fas fa-sign-in-alt mr-2"></i>Iniciar sesión
+      </a>
+      <a href="/register" class="ml-4 flex items-center linkAnimado">
+        <i class="fas fa-user-plus mr-2"></i>Registrate
+      </a>
+      <a href="/encrypt" class="ml-4 flex items-center linkAnimado">
+        <i class="fas fa-lock mr-2"></i>Encriptación
+      </a>
+      <a href="/decrypt" class="ml-4 flex items-center linkAnimado">
+        <i class="fas fa-lock-open mr-2"></i>Desencriptación
+      </a>
+      <a href="/keys" class="ml-4 flex items-center linkAnimado">
+        <i class="fas fa-key mr-2"></i>Mis claves
+      </a>
+      <a href="/about" class="ml-4 flex items-center linkAnimado">
+        <i class="fas fa-info-circle mr-2"></i>¿Quiénes somos?
+      </a>
+    </div>
+  </nav>
+</header>

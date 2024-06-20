@@ -1,0 +1,136 @@
+---
+/**
+ * Componente de KeysManagement.
+ * @Desc: Da formato al JSON que retorna la consulta de llaves del usuario, contiene opciones de eliminación, visualización, copia y ordenamiento.
+ * @author: Josue Padilla
+ * @Date: 20-06-2024
+ */
+
+const { data } = Astro.props;
+let sortedData = [...data];
+let sortOrder = 'default';
+let showPassword = Array(data.length).fill(false);
+
+/**
+ * Formatea una fecha en formato legible.
+ * @param {string} dateString - La cadena de fecha en formato ISO.
+ * @returns {string} - La fecha formateada en formato dd/mm/yyyy, hh:mm:ss AM/PM.
+ */
+function formatDate(dateString) {
+  const options = { 
+    year: 'numeric', month: '2-digit', day: '2-digit', 
+    hour: '2-digit', minute: '2-digit', second: '2-digit', 
+    hour12: true 
+  };
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat('es-ES', options).format(date);
+}
+
+/**
+ * Ordena los datos según el orden establecido.
+ */
+function sortData() {
+  if (sortOrder === 'asc') {
+    sortedData.sort((a, b) => new Date(a.fechaHoraCreacion) - new Date(b.fechaHoraCreacion));
+  } else if (sortOrder === 'desc') {
+    sortedData.sort((a, b) => new Date(b.fechaHoraCreacion) - new Date(a.fechaHoraCreacion));
+  } else {
+    sortedData = [...data];
+  }
+}
+
+/**
+ * Maneja el evento de ordenación cambiando el orden de los datos.
+ */
+function handleSort() {
+  sortOrder = (sortOrder === 'default' || sortOrder === 'desc') ? 'asc' : 'desc';
+  sortData();
+}
+
+/**
+ * Maneja la eliminación de una fila.
+ * @param {number} index - El índice de la fila a eliminar.
+ */
+function handleDelete(index) {
+  sortedData.splice(index, 1);
+  showPassword.splice(index, 1);
+  sortedData = [...sortedData];
+  showPassword = [...showPassword];
+}
+
+/**
+ * Alterna la visibilidad de la contraseña.
+ * @param {number} index - El índice de la fila cuya contraseña se va a mostrar/ocultar.
+ */
+function togglePasswordVisibility(index) {
+  showPassword[index] = !showPassword[index];
+  showPassword = [...showPassword];
+}
+---
+
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+  }
+  th {
+    background-color: #33405f;
+    color: white;
+    cursor: pointer;
+  }
+  tbody tr:hover {
+    background-color: #d9e4fd;
+  }
+  .icon-container {
+    display: none;
+    position: absolute;
+    right: 10px;
+  }
+  td:hover .icon-container {
+    display: inline;
+  }
+  .delete-icon, .view-icon {
+    cursor: pointer;
+    color: #0F172A;
+    margin-left: 5px;
+  }
+  .delete-cell {
+    text-align: center;
+  }
+</style>
+
+<!-- Componente de Tabla -->
+<table class="bg-white">
+  <thead>
+    <tr>
+      <th>Clave</th>
+      <th onClick={() => handleSort()}>Fecha y hora de creación {sortOrder === 'asc' ? '↑' : sortOrder === 'desc' ? '↓' : ''}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {sortedData.map((item, index) => (
+      <tr key={index}>
+        <td class="w-80">
+          {showPassword[index] ? item.clave : '•'.repeat(item.clave.length)}
+          <span class="icon-container">
+            <i class="fa-solid fa-eye view-icon" onClick={() => togglePasswordVisibility(index)}></i>
+            <i class="fa-solid fa-copy view-icon"></i>
+          </span>
+        </td>
+        <td class="w-30">{formatDate(item.fechaHoraCreacion)}</td>
+        <td class="delete-cell">
+          <i class="fa-solid fa-trash-can delete-icon" onClick={() => handleDelete(index)}></i>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
